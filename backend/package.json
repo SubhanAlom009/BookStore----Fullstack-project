@@ -1,0 +1,33 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "mern stack project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SubhanAlom009/BookStore----Fullstack-project.git"
+  },
+  "keywords": [
+    "js",
+    "react",
+    "mern"
+  ],
+  "author": "subhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SubhanAlom009/BookStore----Fullstack-project/issues"
+  },
+  "homepage": "https://github.com/SubhanAlom009/BookStore----Fullstack-project#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.3",
+    "nodemon": "^3.1.0"
+  }
+}

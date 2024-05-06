@@ -1,8 +1,12 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import Login from './Login';
+import { useAuth } from './context/AuthProvider';
+import Logout from './Logout';
 
 function Navbar() {
+    const [authUser,setAuthUser] = useAuth()
+    console.log(authUser);
 
     const [sticky,setSticly] = useState(false);
 
@@ -92,12 +96,15 @@ function Navbar() {
             
             </label>
             </div>
-            <div>   
+            {
+                useAuth?<Logout/>:
+                <div>   
                 <a onClick={()=>document.getElementById("my_modal_1").showModal()} className="btn hover:bg-[#e1e1e1] dark:bg-slate-950 bg-[#F5F5F5] dark:hover:bg-[#1D232A]">Login</a>
                 <div className=''>
                 <Login/>
                 </div>
-            </div>
+            </div> 
+            }
         </div>
         </div>
       </div>

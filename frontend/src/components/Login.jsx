@@ -1,5 +1,7 @@
+import axios from 'axios'
 import React from 'react'
 import { useForm } from "react-hook-form"
+import toast from 'react-hot-toast'
 
 function Login() {
     const {
@@ -7,7 +9,21 @@ function Login() {
         handleSubmit,
         formState: { errors },
       } = useForm()
-      const onSubmit = (data) => console.log(data)
+      const onSubmit =async (data) => {
+        const userInfo = {
+            email:data.email,
+            password:data.password
+        }
+       await axios.post("http://localhost:4000/user/login",userInfo).then((res)=>{
+            if(res.data){
+                toast.success('Loggedin Successfully');
+            }
+            localStorage.setItem("Users",JSON.stringify(res.data.User
+            ));
+        }).catch((err)=>{
+            toast.error('error:',err);
+        })
+      }
   return (
     <div>
         <dialog id="my_modal_1" className="modal ">
