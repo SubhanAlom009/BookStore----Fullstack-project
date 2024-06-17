@@ -5,10 +5,9 @@ import { useAuth } from './context/AuthProvider';
 import Logout from './Logout';
 
 function Navbar() {
-    const [authUser,setAuthUser] = useAuth()
-    console.log(authUser);
 
-    const [sticky,setSticly] = useState(false);
+    const [authUser,setAuthUser] = useAuth()
+    const [sticky,setSticky] = useState(false);
 
     const [theme,setTheme] = useState(localStorage.getItem('theme')?localStorage.getItem('theme'):'light')
 
@@ -30,9 +29,9 @@ function Navbar() {
     useEffect(()=>{
         const handleScroll = () => {
             if(window.scrollY > 30){
-                setSticly(true)
+                setSticky(true)
             } else{
-                setSticly(false)
+                setSticky(false)
             }
         }
     
@@ -97,7 +96,7 @@ function Navbar() {
             </label>
             </div>
             {
-                useAuth?<Logout/>:
+                authUser?<Logout/>:
                 <div>   
                 <a onClick={()=>document.getElementById("my_modal_1").showModal()} className="btn hover:bg-[#e1e1e1] dark:bg-slate-950 bg-[#F5F5F5] dark:hover:bg-[#1D232A]">Login</a>
                 <div className=''>

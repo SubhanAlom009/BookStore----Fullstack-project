@@ -9,20 +9,25 @@ function Login() {
         handleSubmit,
         formState: { errors },
       } = useForm()
-      const onSubmit =async (data) => {
-        const userInfo = {
-            email:data.email,
-            password:data.password
-        }
-       await axios.post("http://localhost:4000/user/login",userInfo).then((res)=>{
-            if(res.data){
-                toast.success('Loggedin Successfully');
+      const onSubmit = async (data) => {
+            const userInfo = {
+                email: data.email,
+                password: data.password
             }
-            localStorage.setItem("Users",JSON.stringify(res.data.User
-            ));
-        }).catch((err)=>{
-            toast.error('error:',err);
-        })
+
+            axios.post("http://localhost:4000/user/login", userInfo)
+            .then((res)=>{
+                toast.success("LoggedIn Successful!")
+                localStorage.setItem("Users",JSON.stringify(res.data))
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            })
+            .catch((err)=>{
+                if(err.response){
+                    toast.error("error", err.response)
+                }
+            })
       }
   return (
     <div>

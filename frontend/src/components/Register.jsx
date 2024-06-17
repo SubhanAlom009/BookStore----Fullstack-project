@@ -9,24 +9,24 @@ function Register() {
         handleSubmit,
         formState: { errors },
       } = useForm()
-      const onSubmit =async (data) => {
-        const userInfo = {
-            fullname:data.fullname,
-            email:data.email,
-            password:data.password
-        }
-       await axios.post("http://localhost:4000/user/register",userInfo).then((res)=>{
-            console.log(res.data);
-            if(res.data){
-                toast.success('Registered Successfully');
-
+      const onSubmit = async (data)=>{
+            const userInfo = {
+                fullname: data.fullname,
+                username: data.username,
+                email: data.email,
+                password: data.password
             }
-            localStorage.setItem("Users",JSON.stringify(res.data.User
-            ));
-        }).catch((err)=>{
-            console.log(err);
-            toast.error('error:',err);
-        })
+
+            await axios.post("http://localhost:4000/user/register",userInfo)
+            .then((res)=>{
+                toast.success("Registered Successful!")
+                localStorage.setItem("Users",JSON.stringify(res.data))
+                window.location.reload();
+            }).catch((error)=>{
+                if(error.response){
+                    toast.error("error", error.response)
+                }
+            })
       }
   return (
     <div className='container flex items-center justify-center px-4 pt-24 max-w-screen-2xl md:px-20'>
@@ -36,9 +36,14 @@ function Register() {
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
                 <label htmlFor="my_modal_1 " className="mb-8 space-y-1">
-                    <p>User Name</p>
-                    <input {...register("fullname", { required: true })} type="text" name="fullname" placeholder="User name" className=" bg-[#e1e1e1] dark:bg-slate-950 border border-gray-400 w-full  input input-bordered" />
+                    <p>Full Name</p>
+                    <input {...register("fullname", { required: true })} type="text" name="fullname" placeholder="Full name" className=" bg-[#e1e1e1] dark:bg-slate-950 border border-gray-400 w-full  input input-bordered" />
                     {errors.fullname && <span className='text-red-500'>This field is required</span>}
+                </label>
+                <label htmlFor="my_modal_1 " className="mb-8 space-y-1">
+                    <p>User Name</p>
+                    <input {...register("username", { required: true })} type="text" name="username" placeholder="User name" className=" bg-[#e1e1e1] dark:bg-slate-950 border border-gray-400 w-full  input input-bordered" />
+                    {errors.username && <span className='text-red-500'>This field is required</span>}
                 </label>
                 <label htmlFor="my_modal_1 " className="space-y-1">
                     <p>Email</p>

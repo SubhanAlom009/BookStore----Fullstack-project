@@ -9,15 +9,16 @@ import { useAuth } from './components/context/AuthProvider.jsx'
 
 
 function App() {
+
+  const [authUser,setAuthUser] = useAuth()
+
   return (
-    <AuthProvider>
-     <div className='dark:bg-[#1D232A] bg-[#F5F5F5]'>
+    <div className='dark:bg-[#1D232A] bg-[#F5F5F5]'>
       <Navbar />
-      <Outlet/>
+      <Outlet context={{authUser}}/>
       <Footer />
       <Toaster />
-     </div>
-    </AuthProvider>
+    </div>
   )
 }
 
